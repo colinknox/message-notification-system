@@ -17,20 +17,33 @@ class EmailService(NotificationService):
         super().__init__(recipient)
 
     def format_message(self, title, content):
-        return f"Subject: {title}\n\nDear {self.recipient} \n{content}"
+        return f"Subject: {title}\n\nDear {self.recipient},\n{content}"
     
     def send_message(self, formatted_message):
         return f"Email sent to {self.recipient}"
 
+class SMSService(NotificationService):
+    def __init__(self, recipient):
+        super().__init__(recipient)
+
+    def format_message(self, title, content):
+        return f"{title}: {content}"
+    
+    def send_message(self, formatted_message):
+        return f"SMS sent to {self.recipient}"
+        
+
 
 def main():
-    test = EmailService("Adam")
+    sms = SMSService("Toto")
+
+    # print(f"DEBUG: SMS Recipient = {sms.recipient}")
+    # test = sms.format_message("Sick Album", "But it can use some more cow bell.")
+    # print(test)
+    # print(sms.send_message(test))
+    # print(sms.notify("Sick Album", "But it can use some more cow bell."))
+
     
-    # print(test.format_message("Flipping Awesome News!", "i tootin' like putin"))
-    # print(f"DEBUG: Format message = {test.format_message("Flipping Awesome News!", "i tootin' like putin")}")
-    # print(test.send_message("wowie zowie"))
-    # print(f"DEBUG: Send message = {test.send_message("wowie zowie")}")
-    print(test.notify("Flipping Awesome News!", "i tootin' like putin"))
 
 
 if __name__ == "__main__":
