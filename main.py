@@ -42,22 +42,21 @@ class PushService(NotificationService):
     def send_message(self, formatted_message):
         return f"Push notification sent to {self.recipient}"
 
-
+def send_notifications(services, title, content):
+    for current_service in services:
+        current_service.notify(title, content)
+        print(current_service.notify(title, content))
 
 
 
 def main():
-    sms = SMSService("Toto")
-    push = PushService("Pim")
+    services = [
+        EmailService("john@email.com"),
+        SMSService("555-1234"),
+        PushService("User123")
+    ]
 
-    # print(f"DEBUG: Push Recipient = {push.recipient}")
-    # test = push.format_message("RETURN MY RUGRATS IN PARIS TAPE", "When you love, you're not alone")
-    # print(test)
-    # print(push.send_message(test))
-    # print(push.notify("RETURN MY RUGRATS IN PARIS TAPE", "When you love, you're not alone"))
-
-    
-
+    send_notifications(services, "Meeting Alert", "Team meeting in 30 minutes")
 
 if __name__ == "__main__":
     main()
