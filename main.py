@@ -44,7 +44,6 @@ class PushService(NotificationService):
 
 def send_notifications(services, title, content):
     for current_service in services:
-        current_service.notify(title, content)
         print(current_service.notify(title, content))
 
 
