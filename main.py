@@ -32,16 +32,29 @@ class SMSService(NotificationService):
     def send_message(self, formatted_message):
         return f"SMS sent to {self.recipient}"
         
+class PushService(NotificationService):
+    def __init__(self, recipient):
+        super().__init__(recipient)
+
+    def format_message(self, title, content):
+        return f"{title} | {content}"
+    
+    def send_message(self, formatted_message):
+        return f"Push notification sent to {self.recipient}"
+
+
+
 
 
 def main():
     sms = SMSService("Toto")
+    push = PushService("Pim")
 
-    # print(f"DEBUG: SMS Recipient = {sms.recipient}")
-    # test = sms.format_message("Sick Album", "But it can use some more cow bell.")
+    # print(f"DEBUG: Push Recipient = {push.recipient}")
+    # test = push.format_message("RETURN MY RUGRATS IN PARIS TAPE", "When you love, you're not alone")
     # print(test)
-    # print(sms.send_message(test))
-    # print(sms.notify("Sick Album", "But it can use some more cow bell."))
+    # print(push.send_message(test))
+    # print(push.notify("RETURN MY RUGRATS IN PARIS TAPE", "When you love, you're not alone"))
 
     
 
